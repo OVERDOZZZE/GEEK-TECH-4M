@@ -1,27 +1,43 @@
-{% extends 'layouts/index.html' %}
+  {% extends 'layouts/index.html' %}
 
-{% block content %}
-    <style type="text/css">
-      .posts {
-          display: flex;
-          justify-content: space-around;
-          width: 80%;
-          margin-left: 10%;
-          flex-wrap: wrap;
-          padding: 20px
-      }
-    </style>
-<div class="posts">
-  {% for post in posts %}
-    <div class="card" style="width: 18rem;">
-      <img src="" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h6 class="card-subtitle">{{ post.creation_date }}</h6>
-        <h5 class="card-title">{{post.title}}</h5>
-        <p class="card-text">{{post.description}}</p>
-        <a href="{% url 'post_detail' post.pk %}" class="btn btn-primary">Подробнее</a>
+  {% block content %}
+      <style type="text/css">
+        .posts {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin-left: 10%;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .posts img {
+            width: 200px;
+            margin-bottom: 20px;
+            border-radius: 10px
+        }
+        .desc {
+          margin-bottom: 10px
+        }
+      </style>
+  <div class="posts">
+    {% for post in posts %}
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          {% if post.image %}
+              <img src="/media/{{ post.image }}" alt="">
+          {% else %}
+              <img src="/media/placeholder.png" alt="">
+          {% endif %}
+          <h6 class="card-subtitle">{{ post.creation_date }}</h6>
+          <h5 class="card-title">{{post.title}}</h5>
+          <div class="desc">
+            {% autoescape on %}
+            {{post.description|linebreaks|truncatewords:6}}
+            {% endautoescape %}
+          </div>
+          <a href="{% url 'post_detail' post.pk %}" class="btn btn-primary">Подробнее</a>
+        </div>
       </div>
-    </div>
-  {% endfor %}
-</div>
-{% endblock %}
+    {% endfor %}
+  </div>
+  {% endblock %}

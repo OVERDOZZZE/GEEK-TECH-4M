@@ -1,0 +1,31 @@
+{% extends 'layouts/index.html' %}
+
+
+{% block content %}
+  {% for category in categories %}
+  <style type="text/css">
+    .cats li{
+        list-style-type: none;
+    }
+    .cats{
+      margin: 20px;
+    }
+    .cats a {
+      text-decoration: none;
+      font-size: 35px;
+      color: #2f22bd;
+      padding: 5px;
+
+    }
+    .cats img {
+        border-radius: 10px
+    }
+  </style>
+  <div class="cats">
+      <ul>
+
+        <li><a href="/posts/?category_id={{ category.id }}"><img width="200px" src="/media/{{ category.image }}" alt=""></a> <a href="/posts/?category_id={{ category.id }}">{{category.name}}</a> </li>
+      </ul>
+  </div>
+  {% endfor %}
+{% endblock %}
