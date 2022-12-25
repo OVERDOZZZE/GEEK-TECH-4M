@@ -14,3 +14,12 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Reviews(models.Model):
+    post = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, related_name='reviews')
+    text = models.TextField()
+    creation_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.text
