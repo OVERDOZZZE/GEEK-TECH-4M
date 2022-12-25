@@ -19,8 +19,7 @@ from posts.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/', hello),
-    path('now_date/', now_date),
-    path('goodbye/', goodbye),
+    path('', main_view),
+    path('posts/', posts_view)
 ]
 
