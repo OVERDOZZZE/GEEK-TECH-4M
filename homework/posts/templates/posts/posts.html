@@ -9,6 +9,7 @@
             margin-left: 10%;
             flex-wrap: wrap;
             padding: 20px;
+
         }
         .posts img {
             width: 200px;
@@ -16,7 +17,12 @@
             border-radius: 10px
         }
         .desc {
-          margin-bottom: 10px
+          margin-bottom: 40px
+        }
+        .btn-primary {
+          position: absolute;
+          bottom: 7px;
+
         }
       </style>
   <div class="posts">
@@ -32,10 +38,10 @@
           <h5 class="card-title">{{post.title}}</h5>
           <div class="desc">
             {% autoescape on %}
-            {{post.description|linebreaks|truncatewords:6}}
+            {{post.description|linebreaks|truncatewords:9}}
             {% endautoescape %}
           </div>
-          <a href="{% url 'post_detail' post.pk %}" class="btn btn-primary">Подробнее</a>
+          <a name="button" href="{% url 'post_detail' post.pk %}" class="btn btn-primary">Подробнее</a>
         </div>
       </div>
     {% endfor %}

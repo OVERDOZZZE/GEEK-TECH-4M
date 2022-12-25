@@ -12,6 +12,7 @@ class Product(models.Model):
     rate = models.FloatField()
     price = models.IntegerField()
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
+    commentable = models.BooleanField(null=True, default=True, blank=True)
 
     def __str__(self):
         return self.title

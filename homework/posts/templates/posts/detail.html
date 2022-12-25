@@ -14,7 +14,7 @@
             justify-content: space-between;
         }
         .comments {
-            margin-top: 30px;
+            margin-top: 10px;
         }
         .comment_block {
             height: max-content;
@@ -23,12 +23,12 @@
             color: black;
             background: #fff;
             border-radius: 3px;
-            margin-top: 100px;
+            margin-top: 20px;
             width: 1220px;
             margin-bottom: 20px
         }
         .post img{
-            width: 450px;
+            width: 650px;
             margin-top: 20px;
             margin-bottom: 20px;
             padding: 2px;
@@ -38,6 +38,9 @@
         }
         .price{
             color: green
+        }
+        .desc {
+            margin-bottom: 150px
         }
     </style>
  <div class="post">
@@ -52,8 +55,14 @@
             <h5>Updated: {{ post.update_date }}</h5>
         </div>
         <h1 class="price">{{post.price}}$</h1>
-        <h5>{{ post.description }}</h5>
-
+        <h5 class="desc">{{ post.description }}</h5>
+        {% if post.commentable %}
+             <form action="/posts/{{post.id}}/" method="post">
+                 {% csrf_token %}
+                 {{ comment_form }}
+                 <button type="submit" class="btn btn-primary">Оставить отзыв</button>
+             </form>
+        {% endif %}
         <div class="comments">
             {% for review in reviews %}
                 <div class="comment_block">
