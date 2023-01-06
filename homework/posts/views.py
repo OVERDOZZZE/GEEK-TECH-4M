@@ -19,7 +19,8 @@ def posts_view(request):
             posts = Product.objects.all()
 
     context = {
-        'posts': posts
+        'posts': posts,
+        'user': None if request.user.is_anonymous else request.user
     }
     return render(request, 'posts/posts.html', context=context)
 
@@ -40,6 +41,7 @@ def post_detail_view(request, id):
 
             if form.is_valid():
                 Reviews.objects.create(
+                    author=request.user,
                     post_id=id,
                     text=form.cleaned_data.get('text')
                 )
@@ -51,6 +53,7 @@ def post_detail_view(request, id):
                     'cats': post.categories.all(),
                     'comment_form': form
                 })
+
 
 def show_categories(request):
     categories = Category.objects.all()
@@ -73,6 +76,7 @@ def post_create_view(request):
 
         if form.is_valid():
             Product.objects.create(
+                author=request.user,
                 title=form.cleaned_data.get('title'),
                 description=form.cleaned_data.get('description'),
                 price=form.cleaned_data.get('price'),

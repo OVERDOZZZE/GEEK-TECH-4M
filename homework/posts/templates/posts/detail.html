@@ -49,7 +49,11 @@
      {% else %}
         <img src="/media/placeholder.png" alt="">
      {% endif %}
-        <h1>{{ post.title }}</h1>
+     <div style="display:flex; justify-content: space-between">
+         <h1>{{ post.title }}</h1>
+         <h1>{{ post.author.username }}</h1>
+     </div>
+
         <div class="dates">
             <h5>Created: {{ post.creation_date }}</h5>
             <h5>Updated: {{ post.update_date }}</h5>
@@ -66,6 +70,7 @@
         <div class="comments">
             {% for review in reviews %}
                 <div class="comment_block">
+                    <h4>{{ review.author.username }}</h4>
                     <p>{{ review.creation_date }}</p>
                     <h5>{{ review.text }}</h5>
 
